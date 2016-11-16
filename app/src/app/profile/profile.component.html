@@ -1,0 +1,59 @@
+<template #content let-c="close">
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Edit profil</h4>
+  </div>
+  <div class="modal-body">
+    <app-edit-profile [close]='c'></app-edit-profile>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+  </div>
+</template>
+<div class="row">
+  <div class="col-xs-12 col-sm-5 col-md-3">
+    <div class="card">
+      <div class="card-block">
+        <h4 class="card-title">Your Profil <i class="fa fa-cogs" aria-hidden="true" style="cursor: pointer;" (click)="open(content)"></i></h4>
+        <h6 class="card-subtitle text-muted">{{my_user.firstName}} {{my_user.lastName}}</h6>
+      </div>
+      <img class="img-responsive hidden-xs-down" src="{{my_user?.image}}" alt="Card image">
+      <div class="card-block">
+        <ul class="list-group list-group-flush list-center">
+          <li class="list-group-item" *ngIf='my_user?.city'><i class="fa fa-globe" aria-hidden="true"></i> {{my_user.city}}</li>
+          <li class="list-group-item" *ngIf='my_user?.phone'><i class="fa fa-phone" aria-hidden="true"></i> {{my_user.phone}}</li>
+          <li class="list-group-item" *ngIf='my_user?.birthDay'><i class="fa fa-birthday-cake" aria-hidden="true"></i> {{my_user.birthDay | amDateFormat:'LL'}}</li>
+          <li class="list-group-item" *ngIf='my_user?.gender'><i class="fa fa-transgender" aria-hidden="true"></i> {{my_user.gender}}</li>
+        </ul>
+      </div>
+    </div>
+    <app-friend-list></app-friend-list>
+  </div>
+  <div class="col-xs-12 col-sm-7 col-md-9">
+    <div class="card card-block">
+      <h3 class="card-title">Your like</h3>
+      <div class="card card-block">
+        <h4 class="card-title">example</h4>
+        <p class="card-text"></p>
+        <a href="#" class="btn btn-primary">fd</a>
+      </div>
+      <div class="card card-block">
+        <h4 class="card-title">example</h4>
+        <p class="card-text"></p>
+        <a href="#" class="btn btn-primary">fd</a>
+      </div>
+      <div class="card card-block">
+        <h4 class="card-title">example</h4>
+        <p class="card-text"></p>
+        <a href="#" class="btn btn-primary">fd</a>
+      </div>
+      <div class="card card-block">
+        <h4 class="card-title">example</h4>
+        <p class="card-text"></p>
+        <a href="#" class="btn btn-primary">fd</a>
+      </div>
+    </div>
+  </div>
+</div>

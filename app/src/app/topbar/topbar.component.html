@@ -2,23 +2,30 @@
   <button class="navbar-toggler hidden-sm-up" type="button" (click)="isCollapsed = !isCollapsed">
     &#9776;
   </button>
-  <a class="navbar-brand" routerLink="/accueil">LOGO</a>
+  <a class="navbar-brand" routerLink="/home"><img class="ico_32" src="/assets/icon/poule2.png" alt="SAIL" /></a>
   <div class="collapse navbar-toggleable-xs" [ngbCollapse]="isCollapsed">
     <ul class="nav navbar-nav">
-      <li class="nav-item active">
+      <li class="nav-item active" *ngIf="!userService.loggedIn">
         <a class="nav-link" routerLink="/accueil" (click)="isCollapsed = !isCollapsed">Accueil <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/home" (click)="isCollapsed = !isCollapsed">home</a>
+      <li class="nav-item" *ngIf="userService.loggedIn">
+        <a class="nav-link" routerLink="/home" (click)="isCollapsed = !isCollapsed">Home</a>
       </li>
-      <li class="nav-item" *ngIf="!userService.isLoggedIn()">
-        <a class="nav-link" routerLink="/signup" (click)="isCollapsed = !isCollapsed">signup</a>
+      <li class="nav-item" *ngIf="!userService.loggedIn">
+        <a class="nav-link" routerLink="/login" (click)="isCollapsed = !isCollapsed">Login</a>
       </li>
-      <li class="nav-item" *ngIf="!userService.isLoggedIn()">
-        <a class="nav-link" routerLink="/login" (click)="isCollapsed = !isCollapsed">login</a>
+      <li class="nav-item" *ngIf="!userService.loggedIn">
+        <a class="nav-link" routerLink="/signup" (click)="isCollapsed = !isCollapsed">Signup</a>
       </li>
-      <li class="nav-item" *ngIf="userService.isLoggedIn()" >
-        <a class="nav-link" (click)="isCollapsed = !isCollapsed; userService.logout()" routerLink="/accueil">logout</a>
+    </ul>
+    <ul class="nav navbar-nav pull-right">
+      <li class="nav-item" *ngIf="userService.loggedIn">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-primary" id="dropdownMenu1" ngbDropdownToggle><img class="img_top" src="/assets/icon/poule.png" alt="img"> {{my_user.firstName}} {{my_user.lastName}}</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <a class="nav-link center-text" (click)="isCollapsed = !isCollapsed; userService.logout()" routerLink="/accueil">Logout</a>
+          </div>
+        </div>
       </li>
     </ul>
   </div>

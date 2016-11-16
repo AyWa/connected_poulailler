@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../service_login/user.service';
+import { user_profile, ProfilService } from '../service_utilisateurs/profil.service';
 
 @Component({
   selector: 'app-topbar',
@@ -8,9 +9,11 @@ import { UserService } from '../service_login/user.service';
 })
 export class TopbarComponent implements OnInit {
   private isCollapsed = true;
-  constructor(private userService: UserService) { }
-
+  private my_user : user_profile;
+  constructor(private userService: UserService,private profilService: ProfilService) {}
+  
   ngOnInit() {
+    this.my_user=this.profilService.getProfile();
   }
 
 }

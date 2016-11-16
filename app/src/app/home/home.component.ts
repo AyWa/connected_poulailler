@@ -7,15 +7,12 @@ import { ProfilService } from '../service_utilisateurs/profil.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  private time_ouverture;
+  private time_fermeture;
   constructor(private profilService: ProfilService) { }
 
   ngOnInit() {
-  }
-
-  yolo(){
-    this.profilService.handleSomething().subscribe((result) => {
-      if(result) console.log(result);
-    });
+    this.time_ouverture = {hour: 13, minute: 30};
+    this.time_fermeture= {hour: 18, minute: 30};
   }
 }

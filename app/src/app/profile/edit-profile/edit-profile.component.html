@@ -1,0 +1,31 @@
+<div class="container">
+    <form [formGroup]="editForm" (ngSubmit)="onSave(editForm.value)">
+      <div class="form-group">
+        <fieldset formGroupName="profile" class="row">
+          <div class="col-md-6 form_size" [class.has-success]="editForm.controls.profile.controls.firstName.valid && !editForm.controls.profile.controls.firstName.pristine" [class.has-danger]="!editForm.controls.profile.controls.firstName.valid && !editForm.controls.profile.controls.firstName.pristine">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <label for="firstName">Firstname</label>
+            <div [hidden]="editForm.controls.profile.controls.firstName.valid || editForm.controls.profile.controls.firstName.pristine" class="form-control-feedback">Firstname <strong>invalid</strong></div>
+            <input class="form-control form-control-success form-control-danger" type="text" formControlName="firstName" placeholder="e.g: James">
+          </div>
+          <div class="col-md-6 form_size" [class.has-success]="editForm.controls.profile.controls.lastName.valid && !editForm.controls.profile.controls.lastName.pristine" [class.has-danger]="!editForm.controls.profile.controls.lastName.valid && !editForm.controls.profile.controls.lastName.pristine">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <label for="lastName">LastName</label>
+            <div [hidden]="editForm.controls.profile.controls.lastName.valid || editForm.controls.profile.controls.lastName.pristine" class="form-control-feedback">Lastname <strong>invalid</strong></div>
+            <input class="form-control form-control-success form-control-danger" type="text" formControlName="lastName" placeholder="e.g: Cook">
+          </div>
+          <div class="col-md-6 form_size">
+            <i class="fa fa-map" aria-hidden="true"></i>
+            <label for="city">City</label>
+            <input class="form-control" type="text" formControlName="city" placeholder="e.g: Paris">
+          </div>
+          <div class="col-md-6 form_size">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            <label for="phone">Phone</label>
+            <input class="form-control" type="text" formControlName="phone" placeholder="e.g: 0687908782">
+          </div>
+        </fieldset>
+        <button type="submit" class="btn btn-success btn-lg" [disabled]="!editForm.valid">Save</button>
+      </div>
+    </form>
+  </div>

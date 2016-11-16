@@ -1,4 +1,21 @@
-<p>
-  This is a beautiful dashboard !
-</p>
-<button type="" class="btn btn-primary btn-lg" (click)="yolo()">show data in CLI</button>
+<h4>Gerer le poulailler :</h4>
+<div class="">
+  <div class="row">
+    <div class="col-xs-12 col-sm-5 col-md-5">
+      <div class="">
+        Programmation de l'ouverture et fermeture du poulailer:
+        <div class="">
+          Ouverture:
+          <ngb-timepicker [(ngModel)]="time_ouverture"></ngb-timepicker>
+        </div>
+        <div class="">
+          Fermeture:
+          <ngb-timepicker [(ngModel)]="time_fermeture"></ngb-timepicker>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-7 col-md-7">
+      col2
+    </div>
+  </div>
+</div>

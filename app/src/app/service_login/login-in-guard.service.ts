@@ -8,7 +8,6 @@ export class LoginInGuardService implements CanActivate{
 
   canActivate() {
     let authToken = localStorage.getItem('auth_token');
-    console.log(authToken);
     if(!this.user.isLoggedIn()){
       this.router.navigate(['/login']);
       return false;
