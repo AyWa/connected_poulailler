@@ -1,0 +1,68 @@
+/* You can add global styles to this file, and also import other style files */
+html {
+    height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  background: rgba(226,226,226,1);
+  background: -moz-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(209,209,209,1) 51%, rgba(219,219,219,1) 83%, rgba(254,254,254,1) 100%);
+  background: -webkit-gradient(top left, top right, color-stop(0%, rgba(226,226,226,1)), color-stop(51%, rgba(209,209,209,1)), color-stop(83%, rgba(219,219,219,1)), color-stop(100%, rgba(254,254,254,1)));
+  background: -webkit-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(209,209,209,1) 51%, rgba(219,219,219,1) 83%, rgba(254,254,254,1) 100%);
+  background: -o-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(209,209,209,1) 51%, rgba(219,219,219,1) 83%, rgba(254,254,254,1) 100%);
+  background: -ms-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(209,209,209,1) 51%, rgba(219,219,219,1) 83%, rgba(254,254,254,1) 100%);
+  background: linear-gradient(to bottom, rgba(226,226,226,1) 0%, rgba(209,209,209,1) 51%, rgba(219,219,219,1) 83%, rgba(254,254,254,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=1 );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+input{
+  height: 40px;
+}
+div.form_size{
+  height: 87px;
+}
+.img-responsive {
+  width:100%;
+  height:auto;
+}
+.ico_32{
+  width: 32px;
+}
+.list-center{
+  text-align: center;
+}
+.center-text{
+  text-align: center;
+  margin: 0px 0px 0px 0px !important;
+}
+.form-control-feedback{
+  display: inline;
+  float: right;
+  margin: 0px 0px 0px 0px;
+}
+input.calendar-input {
+  display: inline-block;
+  width: calc(100% - 40px);
+  border-right: none;
+  border-radius: 0.25em 0 0 0.25em;
+}
+.calendar-button {
+  cursor: pointer;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-left: none;
+}
+.navbar{
+  border-radius: 0rem;
+}
+ngb-datepicker.dropdown-menu{
+	left: calc(100% - 220px);
+}
+.row{
+  margin: 0px 0px 0px 0px;
+}
+.nopad{
+  padding: 0px 0px 0px 0px;
+}
