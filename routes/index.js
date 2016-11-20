@@ -10,7 +10,24 @@ router.get('/poule', passport.authenticate('jwt', { session: false}),function(re
   var poule=req.user.poule;
   res.json({success: true,poule});
 });
-
+router.post('/poulesave',passport.authenticate('jwt', { session: false}),function(req,res){
+  User.findOneAndUpdate(
+    {"_id": req.user._id},
+    {
+      $set:{
+        'poule.nombre_poules' : req.body.my_poule.nombre_poules,
+        'poule.nombre_inside' : req.body.my_poule.nombre_inside,
+        'poule.time_ouverture' : req.body.my_poule.time_ouverture,
+        'poule.time_fermeture' : req.body.my_poule.time_fermeture,
+        'poule.porte_ouverte' : req.body.my_poule.porte_ouverte,
+      }
+    },{new:true},//return the updated doc
+    function(err,user_updated) {
+      console.log(user_updated);
+      if(err) res.json({success: false});
+      else res.json({success: true,user_updated});
+  });
+});
 router.get('/auth/facebook',passport.authenticate('facebook',{scope: ['email','user_birthday','user_location','user_friends']}));
 
 router.get('/auth/facebook/callback',passport.authenticate('facebook',{ session: false, failureRedirect: '/'}),
@@ -111,6 +128,7 @@ router.get('/myfriends', passport.authenticate('jwt', { session: false}), functi
     res.json({success: true,friends});
   })
 });
+
 getToken = function (headers) {
   if (headers && headers.authorization) {
     var parted = headers.authorization.split(' ');

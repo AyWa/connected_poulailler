@@ -2,35 +2,61 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '../service_login/http-client.service';
 import { Http, Headers } from '@angular/http';
 
+export class poule {
+  nombre_poules: number;
+  nombre_inside: number;
+  porte_ouverte: boolean;
+  time_ouverture:{
+    hour:number;
+    minute:number;
+  };
+  time_fermeture:{
+    hour:number;
+    minute:number;
+  };
+}
+
 @Injectable()
 export class PouleService {
-  timing_ouverture: any;
-  timing_fermeture: any;
+  my_poule:poule;
   constructor(private httpClient: HttpClient,private http: Http) {
-
+    this.my_poule=new poule();
+    this.getPouleInit();
   }
-  saveTiming(tmpOuverture,tmpFermeture){
-    console.log(tmpOuverture);
-    console.log(tmpFermeture);
-
-  }
-  getTimingOuverture(){
-    this.timing_ouverture={hour: 7, minute: 30};
-    return this.timing_ouverture;
-  }
-  getTimingFermeture(){
-    this.timing_fermeture={hour: 19, minute: 30};
-    return this.timing_fermeture;
-  }
-  getTiming(){
+  savePoule(){
+    console.log(this.my_poule);
     this.httpClient
-      .get('/timing')
+      .post('/poulesave',JSON.stringify({ my_poule:this.my_poule }))
+      .map(res=>res.json())
+      .map((res)=>{
+        return res;
+      }).subscribe((data)=>{
+        console.log(data);
+        /*if(data.success==true){
+          this.build_profile(data.user_updated.profile);
+        }*/
+      },(error)=>{
+        console.log('mes errors'+error);
+      })
+      return true;
+  }
+  getPoule(){
+    return this.my_poule;
+  }
+  getPouleInit(){
+    this.httpClient
+      .get('/poule')
       .map(res=>res.json())
       .map((res) => {
         return res;
       }).subscribe((data)=>{
-        this.timing_ouverture=data.timing_ouverture;
-        this.timing_fermeture=data.timing_fermeture;
+        console.log(data);
+        this.my_poule.nombre_poules=data.poule.nombre_poules;
+        this.my_poule.nombre_inside=data.poule.nombre_inside;
+        this.my_poule.porte_ouverte=data.poule.porte_ouverte;
+        this.my_poule.time_ouverture=data.poule.time_ouverture;
+        this.my_poule.time_fermeture=data.poule.time_fermeture;
+        console.log(this.my_poule);
       },(error)=>{
         console.log('mes errors'+error);
       })

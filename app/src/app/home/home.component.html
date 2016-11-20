@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12">
     <div class="flex">
-      nombre de poule inside: ??
+      nombre de poule inside: {{my_poule.nombre_inside}}
     </div>
     <div class="flex">
-      nombre de poule outide: ??
+      nombre de poule outside: {{my_poule.nombre_poules-my_poule.nombre_inside}}
     </div>
     <div class="flex">
-      nombre de poule total: ??
+      nombre de poule total: {{my_poule.nombre_poules}}
     </div>
   </div>
 </div>
@@ -19,11 +19,11 @@
         Programmation de l'ouverture et fermeture du poulailer:
         <div class="">
           Ouverture:
-          <ngb-timepicker [(ngModel)]="time_ouverture"></ngb-timepicker>
+          <ngb-timepicker [(ngModel)]="my_poule.time_ouverture"></ngb-timepicker>
         </div>
         <div class="">
           Fermeture:
-          <ngb-timepicker [(ngModel)]="time_fermeture"></ngb-timepicker>
+          <ngb-timepicker [(ngModel)]="my_poule.time_fermeture"></ngb-timepicker>
         </div>
         <button class="btn btn-primary" (click)="onSave()"> Save </button>
       </div>
