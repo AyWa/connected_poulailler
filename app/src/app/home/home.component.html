@@ -1,3 +1,16 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="flex">
+      nombre de poule inside: ??
+    </div>
+    <div class="flex">
+      nombre de poule outide: ??
+    </div>
+    <div class="flex">
+      nombre de poule total: ??
+    </div>
+  </div>
+</div>
 <h4>Gerer le poulailler :</h4>
 <div class="">
   <div class="row">
@@ -12,6 +25,7 @@
           Fermeture:
           <ngb-timepicker [(ngModel)]="time_fermeture"></ngb-timepicker>
         </div>
+        <button class="btn btn-primary" (click)="onSave()"> Save </button>
       </div>
     </div>
     <div class="col-xs-12 col-sm-7 col-md-7">

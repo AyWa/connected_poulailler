@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfilService } from '../service_utilisateurs/profil.service';
-
+import { PouleService } from './poule.service'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,10 +8,13 @@ import { ProfilService } from '../service_utilisateurs/profil.service';
 export class HomeComponent implements OnInit {
   private time_ouverture;
   private time_fermeture;
-  constructor(private profilService: ProfilService) { }
+  constructor(private pouleService:PouleService) { }
 
   ngOnInit() {
-    this.time_ouverture = {hour: 13, minute: 30};
-    this.time_fermeture= {hour: 18, minute: 30};
+    this.time_ouverture = this.pouleService.getTimingOuverture();
+    this.time_fermeture = this.pouleService.getTimingFermeture();
+  }
+  onSave(){
+    this.pouleService.saveTiming(this.time_ouverture,this.time_fermeture);
   }
 }

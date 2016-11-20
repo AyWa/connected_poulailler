@@ -17,8 +17,8 @@ import { LoginInGuardService } from './service_login/login-in-guard.service';
 import { BlockUnprotectService } from './service_login/block-unprotect.service';
 import { UserService } from './service_login/user.service';
 import { ProfilService } from './service_utilisateurs/profil.service';
+import { PouleService } from './home/poule.service';
 import { HttpClient } from './service_login/http-client.service';
-
 
 //other
 import * as moment from 'moment';
@@ -46,7 +46,7 @@ import 'rxjs/Rx';
     MomentModule,
     routing
   ],
-  providers: [LoginInGuardService,BlockUnprotectService,UserService,HttpClient,ProfilService],
+  providers: [LoginInGuardService,BlockUnprotectService,UserService,HttpClient,ProfilService,PouleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

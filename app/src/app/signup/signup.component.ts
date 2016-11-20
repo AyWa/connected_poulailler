@@ -22,10 +22,6 @@ export class SignupComponent implements OnInit {
       profile: this.formBuilder.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        city: [],
-        phone: [],
-        birthDay: ['', Validators.required],
-        gender: ['', Validators.required]
       }),
       data: this.formBuilder.group({
         email: ['', Validators.required],
@@ -34,8 +30,6 @@ export class SignupComponent implements OnInit {
     });
   }
   onSignin(newUser) {
-    console.log(newUser);
-    newUser.profile.birthDay= moment(newUser.profile.birthDay).format('YYYY MM DD');
     console.log(newUser);
     this.userService.signin(newUser).subscribe((result) => {
       if (result) {

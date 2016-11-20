@@ -14,7 +14,7 @@ export class user_profile {
 }
 @Injectable()
 export class ProfilService {
-  
+
   my_user: user_profile;
   constructor(private httpClient: HttpClient,private http: Http){
     this.my_user=new user_profile();

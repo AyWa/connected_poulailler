@@ -13,7 +13,7 @@ module.exports = function(passport) {
   //{"data.email": jwt_payload.email} {id: jwt_payload.id}
   passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
     console.log('passport export');
-    User.findOne({"data.email": jwt_payload.email},{data:'',profile:''},function(err, user) {
+    User.findOne({"data.email": jwt_payload.email},{data:'',profile:'',poule:''},function(err, user) {
           if (err) {
               return done(err, false);
           }

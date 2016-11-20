@@ -5,6 +5,11 @@ var config    = require('../config/database'); // get db config file
 var User      = require('../models/user'); // get the mongoose model
 var jwt 			= require('jwt-simple');
 
+router.get('/poule', passport.authenticate('jwt', { session: false}),function(req,res){
+  console.log(req.user.poule);
+  var poule=req.user.poule;
+  res.json({success: true,poule});
+});
 
 router.get('/auth/facebook',passport.authenticate('facebook',{scope: ['email','user_birthday','user_location','user_friends']}));
 
@@ -20,6 +25,13 @@ router.post('/signin', function(req, res) {
     res.json({success: false, msg: 'Please pass name and password.'});
   } else {
     var newUser = new User(req.body.newUser);
+    newUser.poule.nombre_poules=2;
+    newUser.poule.nombre_inside=0;
+    newUser.poule.time_ouverture.hour=7;
+    newUser.poule.time_ouverture.minute=30;
+    newUser.poule.time_fermeture.hour=19;
+    newUser.poule.time_fermeture.minute=55;
+    newUser.poule.porte_ouverte=false;
     // save the user
     console.log('create new user: ' + newUser);
     newUser.save(function(err) {
@@ -59,6 +71,7 @@ router.post('/authenticate', function(req, res) {
     }
   });
 });
+
 
 // route to a restricted info (GET http://localhost:8080/api/memberinfo)
 router.get('/memberinfo', passport.authenticate('jwt', { session: false}), function(req, res) {
@@ -115,7 +128,7 @@ newUserValid = function(newUser){
   return false;
 }
 profileValid = function(userProfile){
-  if(userProfile.firstName && userProfile.lastName && userProfile.birthDay && userProfile.gender ) return true;
+  if(userProfile.firstName && userProfile.lastName ) return true;
   return false;
 }
 dataValid = function(userData) {
