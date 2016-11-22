@@ -1,0 +1,28 @@
+.info{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: flex-start;
+  text-align: center;
+}
+.service-box{
+  background-color: #E37222;
+  flex-grow: 1;
+}
+.service-box-dif{
+  background-color: #66b9bf;
+  flex-grow: 1;
+}
+.egg {
+  display: flex;
+  width: 2.8rem;
+  height: 4.25rem;
+  margin: 0 auto 1.2rem;
+  background-color: #EEAA7B;
+  -webkit-border-radius: 63px 63px 63px 63px / 108px 108px 72px 72px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}

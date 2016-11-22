@@ -16,3 +16,8 @@ export class HomeComponent implements OnInit {
     this.pouleService.savePoule();
   }
 }
+function spacify(a){
+    a.map((q) =>{
+       return q + ' ';
+    });
+}

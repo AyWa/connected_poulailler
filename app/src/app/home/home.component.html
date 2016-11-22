@@ -1,13 +1,22 @@
 <div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12">
-    <div class="flex">
-      nombre de poule inside: {{my_poule.nombre_inside}}
+  <div class="info">
+    <div class="service-box">
+      <h3 class="service-title">Poule inside</h3>
+      <div class="egg">
+        {{my_poule.nombre_inside}}
+      </div>
     </div>
-    <div class="flex">
-      nombre de poule outside: {{my_poule.nombre_poules-my_poule.nombre_inside}}
+    <div class="service-box-dif">
+      <h3 class="service-title">Poule outside</h3>
+      <div class="egg">
+        {{my_poule.nombre_poules-my_poule.nombre_inside}}
+      </div>
     </div>
-    <div class="flex">
-      nombre de poule total: {{my_poule.nombre_poules}}
+    <div class="service-box">
+      <h3 class="service-title">Poule total</h3>
+      <div class="egg">
+        {{my_poule.nombre_poules}}
+      </div>
     </div>
   </div>
 </div>
