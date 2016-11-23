@@ -32,9 +32,7 @@ export class PouleService {
         return res;
       }).subscribe((data)=>{
         console.log(data);
-        /*if(data.success==true){
-          this.build_profile(data.user_updated.profile);
-        }*/
+        alert("Saved");
       },(error)=>{
         console.log('mes errors'+error);
       })
@@ -59,6 +57,19 @@ export class PouleService {
         console.log(this.my_poule);
       },(error)=>{
         console.log('mes errors'+error);
+      })
+  }
+  controlDoor(action){
+    this.httpClient
+      .post('/controldoor',JSON.stringify({ door:!this.my_poule.porte_ouverte }))
+      .map(res=>res.json())
+      .map((res)=>{
+        return res;
+      }).subscribe((data)=>{
+        console.log(data);
+        this.my_poule.porte_ouverte=data.door;
+      },(error)=>{
+        console.log('yolo');
       })
   }
 }

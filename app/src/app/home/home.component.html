@@ -1,4 +1,4 @@
-<div class="row">
+<div class="">
   <div class="info">
     <div class="service-box">
       <h3 class="service-title">Poule inside</h3>
@@ -20,25 +20,35 @@
     </div>
   </div>
 </div>
-<h4>Gerer le poulailler :</h4>
-<div class="">
-  <div class="row">
-    <div class="col-xs-12 col-sm-5 col-md-5">
-      <div class="">
-        Programmation de l'ouverture et fermeture du poulailer:
-        <div class="">
-          Ouverture:
-          <ngb-timepicker [(ngModel)]="my_poule.time_ouverture"></ngb-timepicker>
-        </div>
-        <div class="">
-          Fermeture:
-          <ngb-timepicker [(ngModel)]="my_poule.time_fermeture"></ngb-timepicker>
-        </div>
-        <button class="btn btn-primary" (click)="onSave()"> Save </button>
+<div class="row">
+  <div class="col-xs-12 col-sm-5 col-md-5">
+    <div class="card">
+      <div class="card-block">
+        <h4 class="card-title">Programmation du poulailler:</h4>
+        <h6 class="card-subtitle text-muted">Cot cot cot</h6>
+      </div>
+      <div class="card-block no_padding">
+        <ul class="list-group list-group-flush list-center">
+          <li class="list-group-item ouverture">Ouverture: <ngb-timepicker [(ngModel)]="my_poule.time_ouverture"></ngb-timepicker></li>
+          <li class="list-group-item ouverture">Fermeture: <ngb-timepicker [(ngModel)]="my_poule.time_fermeture"></ngb-timepicker></li>
+          <li class="list-group-item ouverture"><button class="btn btn-primary" (click)="onSave()"> Save </button></li>
+        </ul>
       </div>
     </div>
-    <div class="col-xs-12 col-sm-7 col-md-7">
-      col2
+  </div>
+  <div class="col-xs-12 col-sm-7 col-md-7">
+    <div class="card">
+      <div class="card-block">
+        <h4 class="card-title">Controlle du poulailler</h4>
+        <h6 class="card-subtitle text-muted">Cot cot cot</h6>
+      </div>
+      <div class="card-block no_padding">
+        <ul class="list-group list-group-flush list-center">
+          <li class="list-group-item ouverture" *ngIf="!my_poule.porte_ouverte&&!waiting">Ouverture: <button class="btn btn-primary" (click)="actionDoor()"> Ouverture </button></li>
+          <li class="list-group-item ouverture" *ngIf="my_poule.porte_ouverte&&!waiting">Fermeture: <button class="btn btn-primary" (click)="actionDoor()"> Fermeture </button></li>
+          <li class="list-group-item ouverture" *ngIf="waiting"><i class="fa fa-hourglass-start fa-4" aria-hidden="true"></i></li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

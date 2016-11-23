@@ -26,3 +26,21 @@
   justify-content: center;
   align-items: center;
 }
+.ouverture{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: flex-start;
+  text-align: center;
+}
+.form-control{
+  text-align: center;
+}
+.no_padding{
+  padding: 0 0 0 0;
+}
+.fa-4{
+  font-size: 7em;
+  color: #66b9bf;
+}

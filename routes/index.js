@@ -4,7 +4,7 @@ var router    = express.Router();
 var config    = require('../config/database'); // get db config file
 var User      = require('../models/user'); // get the mongoose model
 var jwt 			= require('jwt-simple');
-
+var PythonShell = require('python-shell');
 router.get('/poule', passport.authenticate('jwt', { session: false}),function(req,res){
   console.log(req.user.poule);
   var poule=req.user.poule;
@@ -28,6 +28,34 @@ router.post('/poulesave',passport.authenticate('jwt', { session: false}),functio
       else res.json({success: true,user_updated});
   });
 });
+router.post('/controldoor',passport.authenticate('jwt', { session: false}),function(req,res){
+  console.log('to do:'+req.body.door);
+  User.findOneAndUpdate(
+    {"_id": req.user._id},
+    {
+      $set:{
+        'poule.porte_ouverte' : req.body.door,
+      }
+    },{new:true},//return the updated doc
+    function(err,user_updated) {
+      console.log(user_updated);
+      if(err) res.json({success: false});
+      else res.json({success: true,door:user_updated.poule.porte_ouverte});
+  });
+    /*var options = {
+    mode: 'text',
+    pythonPath: '',
+    pythonOptions: ['-u'],
+    scriptPath: '../scripts',
+    args: [req.body.door]
+  };
+  PythonShell.run('motor.py', options, function (err, results) {
+    if (err) throw err;
+    // results is an array consisting of messages collected during execution
+    console.log('results: %j', results);
+  });*/
+});
+
 router.get('/auth/facebook',passport.authenticate('facebook',{scope: ['email','user_birthday','user_location','user_friends']}));
 
 router.get('/auth/facebook/callback',passport.authenticate('facebook',{ session: false, failureRedirect: '/'}),

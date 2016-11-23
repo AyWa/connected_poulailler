@@ -7,7 +7,11 @@ import { poule,PouleService } from './poule.service'
 })
 export class HomeComponent implements OnInit {
   private my_poule : poule;
-  constructor(private pouleService:PouleService) { }
+  private waiting:boolean;
+  constructor(private pouleService:PouleService) {
+      this.waiting=false;
+      //this.actionDoor = this.actionDoor.bind(this);
+  }
 
   ngOnInit() {
     this.my_poule=this.pouleService.getPoule();
@@ -15,9 +19,12 @@ export class HomeComponent implements OnInit {
   onSave(){
     this.pouleService.savePoule();
   }
-}
-function spacify(a){
-    a.map((q) =>{
-       return q + ' ';
-    });
+  actionDoor(){
+    if(this.waiting) return;
+    else{
+      this.waiting=true;
+      this.pouleService.controlDoor(this.my_poule.porte_ouverte);
+      setTimeout(()=> { this.waiting=false;}, 8000);
+    }
+  }
 }
