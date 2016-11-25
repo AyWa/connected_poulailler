@@ -49,7 +49,7 @@ router.post('/controldoor',passport.authenticate('jwt', { session: false}),funct
     scriptPath: './script',
     args: [req.body.door]
   };
-  PythonShell.run('motor.py', options, function (err, results) {
+  PythonShell.run('servo.py', options, function (err, results) {
     if (err) throw err;
     // results is an array consisting of messages collected during execution
     console.log('results: %j', results);
