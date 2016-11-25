@@ -42,18 +42,18 @@ router.post('/controldoor',passport.authenticate('jwt', { session: false}),funct
       if(err) res.json({success: false});
       else res.json({success: true,door:user_updated.poule.porte_ouverte});
   });
-    /*var options = {
+    var options = {
     mode: 'text',
     pythonPath: '',
     pythonOptions: ['-u'],
-    scriptPath: '../scripts',
+    scriptPath: './script',
     args: [req.body.door]
   };
   PythonShell.run('motor.py', options, function (err, results) {
     if (err) throw err;
     // results is an array consisting of messages collected during execution
     console.log('results: %j', results);
-  });*/
+  });
 });
 router.post('/changepoule',passport.authenticate('jwt', { session: false}),function(req,res){
   console.log(req.body.increment);
