@@ -27,4 +27,12 @@ export class HomeComponent implements OnInit {
       setTimeout(()=> { this.waiting=false;}, 8000);
     }
   }
+  increClick(option){
+    console.log(option);
+    if(this.my_poule.nombre_poules>0 || option==='+')this.pouleService.changeNbrPoule(option);
+  }
+  refresh(){
+    console.log("refresh");
+    this.pouleService.getPouleRefresh();
+  }
 }

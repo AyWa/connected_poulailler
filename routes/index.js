@@ -55,7 +55,37 @@ router.post('/controldoor',passport.authenticate('jwt', { session: false}),funct
     console.log('results: %j', results);
   });*/
 });
-
+router.post('/changepoule',passport.authenticate('jwt', { session: false}),function(req,res){
+  console.log(req.body.increment);
+  console.log(req.user.poule.nombre_poules);
+  if(req.body.increment==='-' && req.user.poule.nombre_poules>0 ){
+    User.findOneAndUpdate(
+      {"_id": req.user._id},
+      {
+        $inc:{
+          'poule.nombre_poules' : -1,
+        }
+      },{new:true},//return the updated doc
+      function(err,user_updated) {
+        if(err) res.json({success: false});
+        else res.json({success: true,nombre_poules:user_updated.poule.nombre_poules});
+    });
+  }
+  else {
+    User.findOneAndUpdate(
+      {"_id": req.user._id},
+      {
+        $inc:{
+          'poule.nombre_poules' : 1,
+        }
+      },{new:true},//return the updated doc
+      function(err,user_updated) {
+        console.log(user_updated);
+        if(err) res.json({success: false});
+        else res.json({success: true,nombre_poules:user_updated.poule.nombre_poules});
+    });
+  }
+});
 router.get('/auth/facebook',passport.authenticate('facebook',{scope: ['email','user_birthday','user_location','user_friends']}));
 
 router.get('/auth/facebook/callback',passport.authenticate('facebook',{ session: false, failureRedirect: '/'}),

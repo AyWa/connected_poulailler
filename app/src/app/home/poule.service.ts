@@ -34,12 +34,29 @@ export class PouleService {
         console.log(data);
         alert("Saved");
       },(error)=>{
-        console.log('mes errors'+error);
+        alert('probleme');
       })
       return true;
   }
   getPoule(){
     return this.my_poule;
+  }
+  getPouleRefresh(){
+    this.httpClient
+      .get('/poule')
+      .map(res=>res.json())
+      .map((res) => {
+        return res;
+      }).subscribe((data)=>{
+        console.log(data);
+        this.my_poule.nombre_poules=data.poule.nombre_poules;
+        this.my_poule.nombre_inside=data.poule.nombre_inside;
+        this.my_poule.porte_ouverte=data.poule.porte_ouverte;
+        this.my_poule.time_ouverture=data.poule.time_ouverture;
+        this.my_poule.time_fermeture=data.poule.time_fermeture;
+      },(error)=>{
+        alert('probleme');
+      })
   }
   getPouleInit(){
     this.httpClient
@@ -56,7 +73,7 @@ export class PouleService {
         this.my_poule.time_fermeture=data.poule.time_fermeture;
         console.log(this.my_poule);
       },(error)=>{
-        console.log('mes errors'+error);
+        alert('probleme');
       })
   }
   controlDoor(action){
@@ -66,10 +83,22 @@ export class PouleService {
       .map((res)=>{
         return res;
       }).subscribe((data)=>{
-        console.log(data);
         this.my_poule.porte_ouverte=data.door;
       },(error)=>{
-        console.log('yolo');
+        alert('probleme');
       })
   }
+  changeNbrPoule(action){
+    this.httpClient
+      .post('/changepoule',JSON.stringify({ increment:action }))
+      .map(res=>res.json())
+      .map((res)=>{
+        return res;
+      }).subscribe((data)=>{
+        this.my_poule.nombre_poules=data.nombre_poules;
+      },(error)=>{
+        alert('probleme');
+      })
+  }
+
 }
