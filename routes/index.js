@@ -5,6 +5,82 @@ var config    = require('../config/database'); // get db config file
 var User      = require('../models/user'); // get the mongoose model
 var jwt 			= require('jwt-simple');
 var PythonShell = require('python-shell');
+var cron = require('node-cron');
+var cronOuverture;
+var cronFermeture;
+
+cronOuverture=cron.schedule('* * * * *',function(){
+	console.log('cron initialisation');
+});
+cronFermeture=cron.schedule('* * * * *',function(){
+	console.log('cron initialisation fermeture');
+});
+cronFermeture.start();
+cronOuverture.start();
+changeCron = function(poule,id){
+	cronFermeture.destroy();
+	cronOuverture.destroy();
+	cronOuverture=cron.schedule(poule.time_ouverture.minute+' '+poule.time_ouverture.hour+' '+'* * *',function(){
+		console.log('cron initialisation');
+    var options = {
+    mode: 'text',
+    pythonPath: '',
+    pythonOptions: ['-u'],
+    scriptPath: './script',
+    args: [true]
+    };
+    User.findOne({
+      "_id": id
+    },function(err,user){
+        if(user){
+          if(user.poule.porte_ouverte===false){
+            PythonShell.run('servo.py', options, function (err, results) {
+              if (err) throw err;
+              // results is an array consisting of messages collected during execution
+              console.log('results: %j', results);
+              user.poule.porte_ouverte=true;
+              user.save(function(err) {
+                if (err) {
+                  console.log('error');
+                }
+              });
+            });
+          }
+        }
+    })
+	});
+	cronFermeture=cron.schedule(poule.time_fermeture.minute+' '+poule.time_fermeture.hour+' '+'* * *',function(){
+		console.log('cron initialisation fermeture');
+    var options = {
+    mode: 'text',
+    pythonPath: '',
+    pythonOptions: ['-u'],
+    scriptPath: './script',
+    args: [false]
+    };
+    User.findOne({
+      "_id": id
+    },function(err,user){
+        if(user){
+          if(user.poule.porte_ouverte===true){
+            PythonShell.run('servo.py', options, function (err, results) {
+              if (err) throw err;
+              // results is an array consisting of messages collected during execution
+              console.log('results: %j', results);
+              user.poule.porte_ouverte=false;
+              user.save(function(err) {
+                if (err) {
+                  console.log('error');
+                }
+              });
+            });
+          }
+        }
+    })
+	});
+	cronFermeture.start();
+	cronOuverture.start();
+}
 router.get('/poule', passport.authenticate('jwt', { session: false}),function(req,res){
   console.log(req.user.poule);
   var poule=req.user.poule;
@@ -25,7 +101,10 @@ router.post('/poulesave',passport.authenticate('jwt', { session: false}),functio
     function(err,user_updated) {
       console.log(user_updated);
       if(err) res.json({success: false});
-      else res.json({success: true,user_updated});
+      else {
+        changeCron(user_updated.poule,req.user._id);
+        res.json({success: true,user_updated});
+      }
   });
 });
 router.post('/controldoor',passport.authenticate('jwt', { session: false}),function(req,res){
