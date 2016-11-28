@@ -4,10 +4,10 @@ import RPi.GPIO as GPIO
 import sys
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(18,GPIO.OUT)
+GPIO.setup(21,GPIO.OUT)
 
 #dc =0
-p = GPIO.PWM(18, 50)
+p = GPIO.PWM(21, 50)
 
 #print 'Arguments: ',str(sys.argv)
 
