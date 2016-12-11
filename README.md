@@ -1,16 +1,14 @@
 ## Synopsis
 
-**quick start server and angular 2 app with facebook and email authentification, using jwt and passeport**
+**Little projet: embedded architecture**
+
+![Alt text](15311595_964379400373187_1444713133_o.jpg?raw=true "photo of the project")
 
 ## Installation
 you have to do:
 ```
 npm install
 ```
-in the directory and in the app directory.
-
-You can configure your database in config/database.js. You have also to configure your facebook API in this same file.
-The listenning port is 4200 by default. You can change it in server.js
 
 ## Dev
 
